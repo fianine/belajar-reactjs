@@ -3,24 +3,21 @@ import React from 'react';
 class App extends React.Component {
   render(){
     return (
-      <div>
-        <h1>ReactJS</h1>
-        <h3>Fian <Cinta /> Feby</h3>
-        <Tombol>Ini Button</Tombol>
-      </div>
+      <Title text="ReactJS"/>
     )
   }
 }
 
-const Tombol = (props) => <button>{props.children}</button>
+const Title = (props) => <h1>{props.text}</h1>
 
-class Cinta extends React.Component {
-  render(){
-    return (
-      <div>
-        <span>&hearts;</span>
-      </div>
-    )
+Title.propTypes = {
+  text(props, propName, component){
+    if(!(propName in props)){
+      return new Error(`${propName} kosong`)
+    }
+    if(props[propName].length < 6){
+      return new Error(`${propName} terlalu pendek`)
+    }
   }
 }
 

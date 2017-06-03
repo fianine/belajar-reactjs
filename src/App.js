@@ -4,20 +4,38 @@ import PropTypes from 'prop-types';
 // const App = () => <h1>Belajar ReactJS</h1>
 
 class App extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {txt: "Belajar state"}
+  }
+
+  update(e){
+    this.setState({txt: e.target.value})
+  }
+
   render(){
-    let inivariable = this.props.text
+    let txt = this.props.iniPropsText
     return (
       <div>
         <h1>ReactJS App</h1>
-        <p>{inivariable}</p>
+        <Tambahin update = {this.update.bind(this)}/>
+        <p>{this.state.txt}</p>
+        <p>{txt}</p>
       </div>
     )
   }
 }
 
+const Tambahin = (iniState) => <input type="text" onChange={iniState.update} />
+
 App.propTypes = {
-  txt: React.PropTypes.string,
+  text: React.PropTypes.string.isRequired,
   cat: React.PropTypes.number.isRequired
+}
+
+App.defaultProps = {
+  text: "Ini adalah default dari text"
 }
 
 // class App extends React.Component {
